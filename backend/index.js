@@ -1,11 +1,11 @@
-const express = require('express')
-const mongoose = require('mongoose')
+import express from 'express';
+import router from './routes/food.js';
+
 
 const app = express();
 
-
-
-mongoose.connect(process.env.DATABASE_URL)
+app.use(express.json())
+app.use("/api", router);
 
 
 app.listen(8080, () => {
