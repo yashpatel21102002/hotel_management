@@ -1,4 +1,5 @@
 import React from "react";
+import Rating from "./rating";
 
 const Productcard = ({ data }) => {
   return (
@@ -16,7 +17,7 @@ const Productcard = ({ data }) => {
           <button className="px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 duration-300">
             {data.btn}
           </button>
-          <p>{data.rating}</p>
+          <Rating initialRating={data.rating} />
         </div>
       </div>
     </div>

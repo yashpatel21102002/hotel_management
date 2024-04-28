@@ -11,7 +11,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1Description of Product 1Description of Product 1Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 4,
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1Description of Product 1Description of Product 1Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 3,
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1 Description of Product 1 Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 4,
   },
   {
     id: 4,
@@ -44,7 +44,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1Description of Product 1Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 3,
   },
   {
     id: 5,
@@ -55,7 +55,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1Description of Product 1Description of Product 1Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 4,
   },
   {
     id: 6,
@@ -66,7 +66,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1Description of Product 1Description of Product 1Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 3,
   },
   {
     id: 7,
@@ -77,7 +77,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1 Description of Product 1 Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 4,
   },
   {
     id: 8,
@@ -88,7 +88,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1Description of Product 1Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 3,
   },
   {
     id: 9,
@@ -99,7 +99,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1 Description of Product 1 Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 4,
   },
   {
     id: 10,
@@ -110,7 +110,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1Description of Product 1Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 3,
   },
   {
     id: 11,
@@ -121,7 +121,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1 Description of Product 1 Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 4,
   },
   {
     id: 12,
@@ -132,7 +132,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1Description of Product 1Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 3,
   },
   {
     id: 13,
@@ -143,7 +143,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1 Description of Product 1 Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 4,
   },
   {
     id: 14,
@@ -154,7 +154,7 @@ const products = [
     description:
       "Description of Product 1 Description of Product 1Description of Product 1Description of Product 1",
     btn: "Add To Cart",
-    rating: 4.5,
+    rating: 3,
   },
 ];
 
