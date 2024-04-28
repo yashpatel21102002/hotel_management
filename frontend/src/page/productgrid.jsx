@@ -180,7 +180,7 @@ const Productgrid = () => {
           placeholder="Search food..."
           value={searchQuery}
           onChange={handleSearch}
-          className="border-2 outline-none border-red-500 px-2 py-1 rounded-md placeholder:text-red-300 max-md:w-full"
+          className="border-2 outline-none border-red-500 px-2 py-2 rounded-md placeholder:text-red-300 max-md:w-full"
         />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-4">
