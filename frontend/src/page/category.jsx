@@ -24,7 +24,7 @@ const Categories = () => {
   const visibleButtons = showAll ? buttons : buttons.slice(0, 8);
 
   return (
-    <div className=" flex flex-col gap-2">
+    <div className="flex flex-col gap-2">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl">Categories:-</h1>
         <button
@@ -41,7 +41,7 @@ const Categories = () => {
             className="flex items-center sm:justify-center gap-2 border border-red-500 hover:bg-red-500 focus:bg-red-500 focus:text-white hover:text-white rounded-md px-2 sm:px-4 py-2 duration-300"
           >
             <span className="h-6 w-6 bg-white flex items-center justify-center rounded-md object-cover overflow-hidden">
-              <img src={button.image} alt={"icon"} />
+              <img src={button.image} alt={"icon"} loading="lazy" />
             </span>
             {button.text}
           </button>

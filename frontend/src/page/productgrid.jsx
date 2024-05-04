@@ -172,7 +172,7 @@ const Productgrid = () => {
     setFilteredProducts(filtered);
   };
   return (
-    <div className=" flex flex-col gap-2">
+    <div className="flex flex-1 flex-col gap-2">
       <div className="flex justify-between md:items-center max-md:flex-col max-md:gap-2">
         <h1 className="text-2xl">Categories Items:-</h1>
         <input
@@ -184,9 +184,15 @@ const Productgrid = () => {
         />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-4">
-        {filteredProducts.map((product) => (
-          <Productcard key={product.id} data={product} />
-        ))}
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <Productcard key={product.id} data={product} />
+          ))
+        ) : (
+          <p className="text-center grid col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4">
+            No matching items found for the selected category.
+          </p>
+        )}
       </div>
     </div>
   );
