@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Categories = () => {
+const Categories = ({onSelectCategory}) => {
   const [showAll, setShowAll] = useState(false);
 
   const buttons = [
@@ -21,6 +21,11 @@ const Categories = () => {
     { image: "/images/dal.jpg", text: "Dal" },
   ];
 
+  const handleClick = (e)=>{
+    console.log(e.target.innerText);
+    onSelectCategory(e.target.innerText);
+  }
+
   const visibleButtons = showAll ? buttons : buttons.slice(0, 8);
 
   return (
@@ -39,6 +44,7 @@ const Categories = () => {
           <button
             key={index}
             className="flex items-center sm:justify-center gap-2 border border-red-500 hover:bg-red-500 focus:bg-red-500 focus:text-white hover:text-white rounded-md px-2 sm:px-4 py-2 duration-300"
+            onClick={handleClick}
           >
             <span className="h-6 w-6 bg-white flex items-center justify-center rounded-md object-cover overflow-hidden">
               <img src={button.image} alt={"icon"} loading="lazy" />

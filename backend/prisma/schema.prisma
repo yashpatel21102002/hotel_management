@@ -15,12 +15,14 @@ datasource db {
 
 // Define the model for the FoodItem
 model FoodItem {
-  id          Int     @id @default(autoincrement())
-  name        String
-  category    String
-  imageLink   String?
+  id          Int      @id @default(autoincrement())
+  title       String?
+  category    String?
+  image       String?
+  alt         String?
   description String?
-  star        Int? // Assuming star rating can be fractional
-  price       Float
-  isVeg       Boolean
+  rating      Int? // Assuming star rating can be fractional
+  btn         String?
+  price       String?
+  isVeg       Boolean?
 }
