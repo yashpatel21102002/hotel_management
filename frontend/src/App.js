@@ -1,14 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Contact from "./page/contact";
-import Signin from "./page/signin";
-
+import Home from "./page/home";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Contact />} path="/" />
-        <Route element={<Signin />} path="/login" />
+        <Route element={<Home />} path="/" />
       </Routes>
     </BrowserRouter>
   );
