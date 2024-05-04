@@ -46,3 +46,5 @@ main()
     .finally(async () => {
         await prisma.$disconnect();
     });
+
+    //this is for the educational purposes
