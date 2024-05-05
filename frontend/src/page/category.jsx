@@ -22,6 +22,10 @@ const Categories = ({ onSelectCategory }) => {
   ];
 
   const handleClick = (e) => {
+    if(e === null){
+      //nothing does
+      return;
+    }
     console.log(e.target.innerText);
     onSelectCategory(e.target.innerText);
   };
