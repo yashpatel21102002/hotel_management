@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-const Categories = ({onSelectCategory}) => {
+const Categories = ({ onSelectCategory }) => {
   const [showAll, setShowAll] = useState(false);
 
   const buttons = [
     { image: "/images/ice-crem.webp", text: "All" },
     { image: "/images/gujarati.jpg", text: "Gujarati" },
-    { image: "/images/panjabi.jpg", text: "Panjabi" },
+    { image: "/images/panjabi.jpg", text: "Punjabi" },
     { image: "/images/kathiyawadi.jpg", text: "kathiyawadi" },
     { image: "/images/roti-naan.jpg", text: "Roti-naan" },
     { image: "/images/starter.webp", text: "Starter" },
@@ -21,10 +21,10 @@ const Categories = ({onSelectCategory}) => {
     { image: "/images/dal.jpg", text: "Dal" },
   ];
 
-  const handleClick = (e)=>{
+  const handleClick = (e) => {
     console.log(e.target.innerText);
     onSelectCategory(e.target.innerText);
-  }
+  };
 
   const visibleButtons = showAll ? buttons : buttons.slice(0, 8);
 
