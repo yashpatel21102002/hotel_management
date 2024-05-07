@@ -1,47 +1,44 @@
 import React, { useEffect, useState } from "react";
 import Productcard from "./productcard";
-import axios from "axios"
-
+import axios from "axios";
 
 let products = [];
 
-const first = async()=>{
-  products = (await axios.get('http://localhost:8080/api/food')).data
-  console.log("first",products);
-}
+const first = async () => {
+  products = (await axios.get("http://localhost:8080/api/food")).data;
+  console.log("first", products);
+};
 await first();
 
-
-const Productgrid = ({category}) => {
+const Productgrid = ({ category }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
-  const [searchFilter,setSearchFilter] = useState(products);
-  
-  
-  useEffect(() => {
-    
+  const [searchFilter, setSearchFilter] = useState(products);
 
-    const filter = async ()=>{
-      if(category === ""){
-        console.log("inside the if")
+  useEffect(() => {
+    const filter = async () => {
+      if (category === "") {
+        console.log("inside the if");
         return;
       }
-      if(category.toLowerCase() === "all"){
-        const filteredProducts = await products
+      if (category.toLowerCase() === "all") {
+        const filteredProducts = await products;
         setFilteredProducts(filteredProducts);
         setSearchFilter(filteredProducts);
-      }else{
-
-        const filteredProducts = await products.filter((product)=> product.category.toLowerCase().trim().includes(category.toLowerCase().trim()))
+      } else {
+        const filteredProducts = await products.filter((product) =>
+          product.category
+            .toLowerCase()
+            .trim()
+            .includes(category.toLowerCase().trim())
+        );
         setFilteredProducts(filteredProducts);
         setSearchFilter(filteredProducts);
-        //console.log(filteredProducts)
       }
-      console.log("second useeffect")
-    }
-    filter()
-  },[category])
-
+      console.log("second useeffect");
+    };
+    filter();
+  }, [category]);
 
   const handleSearch = (e) => {
     const query = e.target.value;
@@ -61,7 +58,7 @@ const Productgrid = ({category}) => {
           placeholder="Search food..."
           value={searchQuery}
           onChange={handleSearch}
-          className="border-2 outline-none border-red-500 px-2 py-2 rounded-md placeholder:text-red-300 max-md:w-full"
+          className="border-2 outline-none border-red-500 px-2 py-2 rounded-md placeholder:text-red-300 max-md:w-full w-[40%]"
         />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-4">

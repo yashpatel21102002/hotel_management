@@ -16,17 +16,17 @@ const Counter = () => {
   };
 
   return (
-    <div className="flex items-center gap-2 w-max p-1 rounded-full">
+    <div className="flex items-center gap-2 w-max rounded-full">
       <button
         onClick={handleDecrement}
-        className="border-none rounded-sm p-2 duration-300 text-red-500 hover:bg-rose-100"
+        className="border-none rounded-sm p-1 duration-300 text-red-500 hover:bg-rose-100"
       >
         <MinusIcon className="h-4 w-4" />
       </button>
       <div className="text-red-500">{count}</div>
       <button
         onClick={handleIncrement}
-        className="border-none rounded-md p-2 duration-300 text-red-500 hover:bg-rose-100"
+        className="border-none rounded-md p-1 duration-300 text-red-500 hover:bg-rose-100"
       >
         <PlushIcon className="h-4 w-4" />
       </button>
