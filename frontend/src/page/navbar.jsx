@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="sticky top-0 flex justify-between bg-red-500 px-container py-4 text-white">
+    <div className="sticky top-0 flex justify-between bg-primary px-container py-4 text-white">
       <h1>Hotel Name</h1>
 
       {cartOpen ? (

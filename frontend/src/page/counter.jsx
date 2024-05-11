@@ -19,14 +19,14 @@ const Counter = () => {
     <div className="flex items-center gap-2 w-max rounded-full">
       <button
         onClick={handleDecrement}
-        className="border-none rounded-sm p-1 duration-300 text-red-500 hover:bg-rose-100"
+        className="border-none rounded-sm p-1 duration-300 text-primary hover:bg-secondary hover:bg-opacity-50"
       >
         <MinusIcon className="h-4 w-4" />
       </button>
-      <div className="text-red-500">{count}</div>
+      <div className="text-primary">{count}</div>
       <button
         onClick={handleIncrement}
-        className="border-none rounded-md p-1 duration-300 text-red-500 hover:bg-rose-100"
+        className="border-none rounded-md p-1 duration-300 text-primary hover:bg-secondary hover:bg-opacity-50"
       >
         <PlushIcon className="h-4 w-4" />
       </button>
