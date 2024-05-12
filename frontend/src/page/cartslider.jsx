@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import clsx from "clsx";
 import { ReactComponent as CrossIcon } from "./assets/cross.svg";
@@ -7,12 +8,14 @@ import CartItem from "./cartitem";
 const Cartslider = ({ side = "right", onClose }) => {
   const [foodItems, setFoodItems] = useState([
     {
+      id: "1",
       title: "Sev Tamater",
       price: "100",
       image: "/images/gujarati.jpg",
       alt: "Sev-Tamater",
     },
     {
+      id: "2",
       title: "Panner Angara",
       price: "100",
       image: "/images/panjabi.jpg",
@@ -20,8 +23,14 @@ const Cartslider = ({ side = "right", onClose }) => {
     },
   ]);
 
+  const [selectedItems, setSelectedItems] = useState([]);
+
   const handleRemoveItem = (idToRemove) => {
     setFoodItems(foodItems.filter((item) => item.id !== idToRemove));
+  };
+
+  const handlePlaceOrder = () => {
+    setSelectedItems([...foodItems]);
   };
 
   return (
@@ -32,7 +41,7 @@ const Cartslider = ({ side = "right", onClose }) => {
           <div
             className={clsx("pointer-events-none fixed flex", {
               "inset-y-0 left-0 pr-10 max-w-full": side === "left",
-              "inset-y-0 right-0 sm:pl-10 max-w-full": side === "right",
+              "inset-y-0 right-0 sm:pl-10 max-w-full ": side === "right",
               "inset-x-0 top-0 pb-10 h-[50vh] max-h-full": side === "top",
               "inset-x-0 bottom-0 pt-10 max-h-full": side === "bottom",
             })}
@@ -43,9 +52,9 @@ const Cartslider = ({ side = "right", onClose }) => {
                 "max-h-max": ["top", "bottom"].includes(side),
               })}
             >
-              <div className="flex flex-col bg-rose-200 h-[100dvh] shadow-xl overflow-y-auto no-scrollbar">
-                <div className="flex items-center justify-between px-2 py-4 border-b-2 border-red-500 ">
-                  <h2 className="font-medium text-xl text-red-600">Bag</h2>
+              <div className="flex flex-col bg-secondary h-[100dvh] shadow-xl overflow-y-auto no-scrollbar">
+                <div className="flex items-center justify-between px-2 py-4 border-b-2 border-primary ">
+                  <h2 className="font-medium text-xl text-darkprimary">Bag</h2>
                   <div className="ml-3 flex h-5 items-center">
                     <button
                       type="button"
@@ -54,7 +63,7 @@ const Cartslider = ({ side = "right", onClose }) => {
                     >
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Close panel button</span>
-                      <CrossIcon className="h-6 w-6 text-red-600" />
+                      <CrossIcon className="h-6 w-6 text-darkprimary" />
                     </button>
                   </div>
                 </div>
@@ -71,10 +80,10 @@ const Cartslider = ({ side = "right", onClose }) => {
                       </div>
                     </div>
                   ) : (
-                    foodItems.map((item, index) => (
+                    foodItems.map((item) => (
                       <CartItem
                         data={item}
-                        key={index}
+                        key={item.id}
                         onRemoveItem={handleRemoveItem}
                       />
                     ))
@@ -83,14 +92,17 @@ const Cartslider = ({ side = "right", onClose }) => {
                 <div>
                   {foodItems.length === 0 ? (
                     <a
-                      className="bg-red-500 text-white w-full py-2 text-xl px-2 flex items-center justify-center gap-2"
+                      className="bg-primary text-white w-full py-2 text-xl px-2 flex items-center justify-center gap-2"
                       href="/"
                     >
                       Continue Order
                       <RightSideIcon className="h-4 w-4" />
                     </a>
                   ) : (
-                    <button className="bg-red-500 text-white w-full py-2 text-xl px-2">
+                    <button
+                      className="bg-primary text-white w-full py-2 text-xl px-2"
+                      onClick={handlePlaceOrder}
+                    >
                       Place Order
                     </button>
                   )}

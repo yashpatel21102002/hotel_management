@@ -19,7 +19,7 @@ const CartItem = ({ data, onRemoveItem }) => {
         className="object-cover h-full w-full"
       />
       <div className="px-2 flex flex-col justify-between">
-        <div className="flex justify-between items-center text-red-500 sm:text-lg font-bold">
+        <div className="flex justify-between items-center text-primary sm:text-lg font-bold">
           <p>{data.title}</p>
           <p>₹{data.price}</p>
         </div>
@@ -28,7 +28,7 @@ const CartItem = ({ data, onRemoveItem }) => {
         </div>
         <div>
           <button
-            className="text-red-500 sm:text-lg"
+            className="text-primary sm:text-lg"
             onClick={handleRemoveClick}
             disabled={removing}
           >
