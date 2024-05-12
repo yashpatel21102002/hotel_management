@@ -1,10 +1,11 @@
 import express from 'express';
 import { WebSocket, WebSocketServer } from 'ws';
 import cors from 'cors';
-import  foodRouter  from './routes/food.js';
+import foodRouter from './routes/food.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
-app.use(cors())
+app.use(cors());
 app.use("/api", foodRouter);
 const server = app.listen(8080, () => {
     console.log("App is listening on port 8080");
@@ -12,64 +13,89 @@ const server = app.listen(8080, () => {
 
 const wss = new WebSocketServer({ server });
 
-// Map to store rooms (hotels)
-const rooms = new Map();
+// Users will be stored here
+let users = {};
 
-// Define a counter for assigning user IDs
-let userIdCounter = 1;
+const sendTo = (connection, message) => {
+    connection.send(JSON.stringify(message));
+};
 
-wss.on('connection', (ws) => {
-    console.log('Client connected.');
+wss.on("connection", (ws) => {
+    ws.on("message", (msg) => {
+        let data;
 
-    ws.on('error', (error) => {
-        console.error('WebSocket error:', error);
-    });
-
-    ws.on('close', () => {
-        console.log('Client disconnected.');
-    });
-
-    ws.on('message', (message, isBinary) => {
-        const data = JSON.parse(message);
-        console.log('Message received:', message);
-        // Setting the rooms map
-        if (data.type === "admin") {
-            console.log('Admin joined room:', data.roomId);
-            rooms.set(data.roomId, { admin: ws, customer: null, id: userIdCounter++ });
-        }
-        if (data.type === "customer") {
-            console.log('Customer joined room:', data.roomId);
-            rooms.set(data.roomId, { admin: null, customer: ws, id: userIdCounter++ });
+        // Accepting only JSON messages
+        try {
+            data = JSON.parse(msg);
+        } catch (e) {
+            console.log("Invalid JSON");
+            data = {};
         }
 
-        // Now if the type is chat then...
-        if (data.type === "chat") {
-            const room = rooms.get(data.roomId);
+        const { type, userType, hotelId, tableId, recipientId, message } = data;
 
-            if (room) {
-                if (room.admin === ws && room.id === 1) {
-                    console.log('Admin broadcasting message to all users in the room.');
-                    // Type 1: Admin broadcasting message to all users in the room
-                    rooms.forEach((roomObj) => {
-                        if (roomObj.customer && roomObj.customer.readyState === WebSocket.OPEN) {
-                            roomObj.customer.send(`Admin (broadcast) says: ${data.message}`);
-                        }
+        // Handle message by type
+        switch (type) {
+            // When a user tries to login
+            case "admin":
+            case "customer":
+                // Check if username is available
+                if (users[tableId]) {
+                    sendTo(ws, {
+                        message: "Username is already in use.",
+                        id: tableId
                     });
-                } else if (room.admin === ws && room.id !== null) {
-                    console.log('Admin sending message to specific user.');
-                    // Type 2: Admin sending message to specific user
-                    const userRoom = Array.from(rooms.values()).find((roomObj) => roomObj.id === room.id && roomObj.customer !== null);
-                    if (userRoom && userRoom.customer && userRoom.customer.readyState === WebSocket.OPEN) {
-                        userRoom.customer.send(`Admin says: ${data.message}`);
-                    }
-                } else if (room.customer === ws) {
-                    console.log('Customer sending message to admin.');
-                    // Type 3: Customer sending message to admin
-                    if (room.admin && room.admin.readyState === WebSocket.OPEN) {
-                        room.admin.send(`Customer (ID: ${room.id}) says: ${data.message}`);
-                    }
+                } else {
+                    // Store user information
+                    const newId = uuidv4(); // Generate a unique ID for the user
+                    users[newId] = {
+                        userType,
+                        hotelId,
+                        tableId,
+                        ws // Store the WebSocket connection
+                    };
+
+                    sendTo(ws, {
+                        message: "Connection established for user with ID: " + newId,
+                        tableId: newId
+                    });
                 }
-            }
+                break;
+
+            case "chat":
+                // Check if user to send offer to exists
+                const sender = users[tableId];
+
+                if (sender && users[recipientId]) {
+                    const recipientSocket = users[recipientId].ws;
+
+                    // Send the message to the recipient
+                    sendTo(recipientSocket, {
+                        type: "chat",
+                        senderId: tableId,
+                        message: message
+                    });
+
+                    // Send confirmation message to the sender
+                    sendTo(ws, {
+                        message: "Message sent to " + recipientId
+                    });
+                } else {
+                    // Send error message if recipient is not found
+                    sendTo(ws, {
+                        message: "Recipient " + recipientId + " is not connected."
+                    });
+                }
+                break;
+        }
+    });
+
+    // Cleanup on WebSocket close
+    ws.on("close", () => {
+        const userId = Object.keys(users).find(key => users[key].ws === ws);
+        if (userId) {
+            delete users[userId];
+            console.log("User disconnected:", userId);
         }
     });
 });
