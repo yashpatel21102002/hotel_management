@@ -25,4 +25,27 @@ model FoodItem {
   btn         String?
   price       String?
   isVeg       Boolean?
+  hotel       Hotel?   @relation(fields: [hotelId], references: [id])
+  hotelId     Int?
+}
+
+//schema of hotel
+model Hotel {
+  id        Int        @id @default(autoincrement())
+  name      String
+  address   String
+  city      String
+  country   String
+  foodItems FoodItem[]
+  tables    Table[]
+}
+
+//Define the table name
+model Table {
+  id          Int     @id @default(autoincrement())
+  tableNumber Int
+  capacity    Int
+  isReserved  Boolean @default(false)
+  hotel       Hotel   @relation(fields: [hotelId], references: [id])
+  hotelId     Int
 }
