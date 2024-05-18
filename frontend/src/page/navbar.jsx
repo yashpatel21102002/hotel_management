@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const hotelname =useSelector((state) => state.hotel.hotelData?.name || "");
+  const username = useSelector((state)=> state.user.name || "")
 
   const toggleCart = () => {
     setCartOpen(!cartOpen);
@@ -19,8 +20,9 @@ const Navbar = () => {
       {cartOpen ? (
         <Cartslider onClose={toggleCart} />
       ) : (
-        <button onClick={toggleCart}>
-          <p className="sr-only">cart-icon</p>
+        <button onClick={toggleCart} className="flex gap-2 justify-center items-center">
+          {/* <p className="sr-only">cart-icon</p> */}
+          <span>Hey {username ? username : "User!"}</span>
           <CartIcon />
         </button>
       )}

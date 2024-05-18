@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchHotel } from "../redux/hotel";
+import { addName } from "../redux/user";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Home = () => {
   const handleProceed = () => {
     const url = window.location.href;
     const hotelId = url.split("/").pop();
+    dispatch(addName({name,number}))
     if (hotelId) {
       dispatch(fetchHotel(hotelId)).then((result) => {
         if (fetchHotel.fulfilled.match(result)) {
