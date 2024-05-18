@@ -1,10 +1,14 @@
 import React from "react";
 import Rating from "./rating";
+import { useDispatch } from "react-redux";
+import { addItem } from "../redux/cart";
 
-const Productcard = ({ data, onAddToCart }) => {
-  const handleAddToCart = () => {
-    onAddToCart(data); // Pass the product data to the parent component
-  };
+const Productcard = ({data}) => {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (data) => {
+    dispatch(addItem(data))
+  }
 
   return (
     <div>
@@ -20,7 +24,7 @@ const Productcard = ({ data, onAddToCart }) => {
         <div className="flex justify-between items-center">
           <button
             className="px-4 py-2 bg-primary rounded-md text-white hover:bg-darkprimary duration-300"
-            onClick={handleAddToCart}
+            onClick={() => handleAddToCart(data)}
           >
             {data.btn}
           </button>

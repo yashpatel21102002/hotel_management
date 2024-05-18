@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Productcard from "./productcard";
 
 
@@ -35,7 +35,6 @@ const Productgrid = ({ category }) => {
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
-
 
   return (
     <div className="flex flex-1 flex-col gap-2">

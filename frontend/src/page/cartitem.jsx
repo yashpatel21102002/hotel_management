@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import Counter from "./counter";
+import { useDispatch } from "react-redux";
+import { removeItem } from "../redux/cart";
 
-const CartItem = ({ data, onRemoveItem }) => {
+const CartItem = ({ data }) => {
   const [removing, setRemoving] = useState(false);
+  const dispatch = useDispatch()
 
   const handleRemoveClick = () => {
     setRemoving(true);
     setTimeout(() => {
-      onRemoveItem(data.id);
+      dispatch(removeItem(data.id))
       setRemoving(false);
     }, 1000);
   };

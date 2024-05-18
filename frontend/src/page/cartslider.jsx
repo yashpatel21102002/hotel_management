@@ -4,33 +4,18 @@ import clsx from "clsx";
 import { ReactComponent as CrossIcon } from "./assets/cross.svg";
 import { ReactComponent as RightSideIcon } from "./assets/rightside.svg";
 import CartItem from "./cartitem";
+import { useSelector,useDispatch } from "react-redux";
+
 
 const Cartslider = ({ side = "right", onClose }) => {
-  const [foodItems, setFoodItems] = useState([
-    {
-      id: "1",
-      title: "Sev Tamater",
-      price: "100",
-      image: "/images/gujarati.jpg",
-      alt: "Sev-Tamater",
-    },
-    {
-      id: "2",
-      title: "Panner Angara",
-      price: "100",
-      image: "/images/panjabi.jpg",
-      alt: "Panner-Angara",
-    },
-  ]);
+  const cartItems = useSelector((state) => state.cart.items)
 
   const [selectedItems, setSelectedItems] = useState([]);
 
-  const handleRemoveItem = (idToRemove) => {
-    setFoodItems(foodItems.filter((item) => item.id !== idToRemove));
-  };
+ 
 
   const handlePlaceOrder = () => {
-    setSelectedItems([...foodItems]);
+    //setSelectedItems([...foodItems]);
   };
 
   return (
@@ -68,7 +53,7 @@ const Cartslider = ({ side = "right", onClose }) => {
                   </div>
                 </div>
                 <div className="flex-1 p-2 flex flex-col gap-2">
-                  {foodItems.length === 0 ? (
+                  {cartItems.length === 0 ? (
                     <div className="flex flex-col gap-8 items-center justify-center h-full p-4">
                       <div className="flex flex-col items-center justify-center">
                         <img
@@ -80,17 +65,16 @@ const Cartslider = ({ side = "right", onClose }) => {
                       </div>
                     </div>
                   ) : (
-                    foodItems.map((item) => (
+                    cartItems.map((item) => (
                       <CartItem
                         data={item}
                         key={item.id}
-                        onRemoveItem={handleRemoveItem}
                       />
                     ))
                   )}
                 </div>
                 <div>
-                  {foodItems.length === 0 ? (
+                  {cartItems.length === 0 ? (
                     <a
                       className="bg-primary text-white w-full py-2 text-xl px-2 flex items-center justify-center gap-2"
                       href="/"
