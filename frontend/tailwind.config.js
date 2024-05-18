@@ -6,9 +6,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#EF4444",
-        darkprimary: "#E53935",
-        secondary: "#fecdd3",
+        primary: "#151515",
+        darkprimary: "#A91D3A",
+        secondary: "#EEEEEE",
       },
       spacing: {
         container: `max(
