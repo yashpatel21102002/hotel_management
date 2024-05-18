@@ -2,11 +2,13 @@ import express from 'express';
 import { WebSocket, WebSocketServer } from 'ws';
 import cors from 'cors';
 import foodRouter from './routes/food.js';
+import hotelRouter from './routes/hotel.js';
 import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
 app.use(cors());
-app.use("/api", foodRouter);
+app.use("/api/food/", foodRouter);
+app.use("/api/hotel/", hotelRouter);
 const server = app.listen(8080, () => {
     console.log("App is listening on port 8080");
 });

@@ -5,7 +5,7 @@ const router = express.Router();
 const prisma = new PrismaClient();
 
 // API to post a new food item
-router.post("/food", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         const food = req.body;
         const postFood = await prisma.foodItem.create({

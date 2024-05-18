@@ -1,54 +1,42 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Productcard from "./productcard";
-import axios from "axios";
 
-let products = [];
-
-const first = async () => {
-  products = (await axios.get("http://localhost:8080/api/food")).data;
-  console.log("first", products);
-};
-await first();
 
 const Productgrid = ({ category }) => {
+  const foodItems = useSelector((state) => state.hotel.hotelData?.foodItems || []);
+  console.log('foodItems:', foodItems);
+
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(products);
-  const [searchFilter, setSearchFilter] = useState(products);
+  const [searchFilter, setSearchFilter] = useState([]);
 
   useEffect(() => {
-    const filter = async () => {
-      if (category === "") {
-        console.log("inside the if");
-        return;
-      }
-      if (category.toLowerCase() === "all") {
-        const filteredProducts = await products;
-        setFilteredProducts(filteredProducts);
-        setSearchFilter(filteredProducts);
-      } else {
-        const filteredProducts = await products.filter((product) =>
-          product.category
-            .toLowerCase()
-            .trim()
-            .includes(category.toLowerCase().trim())
+    const filterProducts = () => {
+      let filteredProducts = foodItems;
+
+      if (category && category.toLowerCase() !== "all") {
+        filteredProducts = foodItems.filter(
+          (product) => product.category.toLowerCase().trim() === category.toLowerCase().trim()
         );
-        setFilteredProducts(filteredProducts);
-        setSearchFilter(filteredProducts);
       }
-      console.log("second useeffect");
+
+      if (searchQuery) {
+        filteredProducts = filteredProducts.filter(
+          (product) => product.title.toLowerCase().includes(searchQuery.toLowerCase().trim())
+        );
+      }
+
+      setSearchFilter(filteredProducts);
     };
-    filter();
-  }, [category]);
+
+    filterProducts()
+  }, [category, foodItems, searchQuery]);
 
   const handleSearch = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-
-    const filtered = filteredProducts.filter((product) =>
-      product.title.toLowerCase().includes(query.toLowerCase().trim())
-    );
-    setSearchFilter(filtered);
+    setSearchQuery(e.target.value);
   };
+
+
   return (
     <div className="flex flex-1 flex-col gap-2">
       <div className="flex justify-between md:items-center max-md:flex-col max-md:gap-2">
