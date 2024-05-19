@@ -1,14 +1,16 @@
-/** @type {import('tailwindcss').Config} */
-const colors = require("tailwindcss/colors");
-
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: "#151515",
-        darkprimary: "#A91D3A",
-        secondary: "#EEEEEE",
+        //theme:1
+        // primary: "#EF4444",
+        // darkprimary: "#E53935",
+        // secondary: "#fecdd3",
+        //theme:2
+        primary: "#000",
+        darkprimary: "#18181b",
+        secondary: "#3f3f46",
       },
       spacing: {
         container: `max(

@@ -4,15 +4,12 @@ import clsx from "clsx";
 import { ReactComponent as CrossIcon } from "./assets/cross.svg";
 import { ReactComponent as RightSideIcon } from "./assets/rightside.svg";
 import CartItem from "./cartitem";
-import { useSelector,useDispatch } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
 
 const Cartslider = ({ side = "right", onClose }) => {
-  const cartItems = useSelector((state) => state.cart.items)
+  const cartItems = useSelector((state) => state.cart.items);
 
   const [selectedItems, setSelectedItems] = useState([]);
-
- 
 
   const handlePlaceOrder = () => {
     //setSelectedItems([...foodItems]);
@@ -39,7 +36,7 @@ const Cartslider = ({ side = "right", onClose }) => {
             >
               <div className="flex flex-col bg-secondary h-[100dvh] shadow-xl overflow-y-auto no-scrollbar">
                 <div className="flex items-center justify-between px-2 py-4 border-b-2 border-primary ">
-                  <h2 className="font-medium text-xl text-darkprimary">Bag</h2>
+                  <h2 className="font-medium text-xl text-primary">Bag</h2>
                   <div className="ml-3 flex h-5 items-center">
                     <button
                       type="button"
@@ -48,7 +45,7 @@ const Cartslider = ({ side = "right", onClose }) => {
                     >
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Close panel button</span>
-                      <CrossIcon className="h-6 w-6 text-darkprimary" />
+                      <CrossIcon className="h-6 w-6 text-primary" />
                     </button>
                   </div>
                 </div>
@@ -66,10 +63,7 @@ const Cartslider = ({ side = "right", onClose }) => {
                     </div>
                   ) : (
                     cartItems.map((item) => (
-                      <CartItem
-                        data={item}
-                        key={item.id}
-                      />
+                      <CartItem data={item} key={item.id} />
                     ))
                   )}
                 </div>
