@@ -5,17 +5,17 @@ import { removeItem } from "../redux/cart";
 
 const CartItem = ({ data }) => {
   const [removing, setRemoving] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleRemoveClick = () => {
     setRemoving(true);
     setTimeout(() => {
-      dispatch(removeItem(data.id))
+      dispatch(removeItem(data.id));
       setRemoving(false);
     }, 1000);
   };
   return (
-    <div className="grid grid-cols-[30%_1fr] bg-white min-h-[100px] overflow-hidden">
+    <div className="grid grid-cols-[30%_1fr] bg-white overflow-hidden w-full aspect-auto">
       <img
         src={data.image}
         alt={data.alt}

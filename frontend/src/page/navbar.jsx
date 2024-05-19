@@ -26,12 +26,12 @@ const Navbar = () => {
           <span>Hey {username ? username : "User!"}</span>
           <button
             onClick={toggleCart}
-            className="flex gap-2 justify-center items-center"
+            className="relative flex gap-2 justify-center items-center"
           >
-            {/* <p className="sr-only">cart-icon</p> */}
-
             <CartIcon />
-            {counter}
+            <p className="absolute -top-2 -right-2 bg-secondary rounded-full text-xs px-2 py-1">
+              {counter}
+            </p>
           </button>
         </div>
       )}

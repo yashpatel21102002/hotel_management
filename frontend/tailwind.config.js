@@ -10,7 +10,8 @@ module.exports = {
         //theme:2
         primary: "#000",
         darkprimary: "#18181b",
-        secondary: "#3f3f46",
+        secondary: "#a1a1aa",
+        darksecondary: "#3f3f46",
       },
       spacing: {
         container: `max(

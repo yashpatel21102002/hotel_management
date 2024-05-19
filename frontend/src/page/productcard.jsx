@@ -2,14 +2,26 @@ import React from "react";
 import Rating from "./rating";
 import { useDispatch } from "react-redux";
 import { addItem } from "../redux/cart";
+import { Slide, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Productcard = ({data}) => {
+const Productcard = ({ data }) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = (data) => {
-    dispatch(addItem(data))
-  }
-
+    dispatch(addItem(data));
+    toast.success("Item added to cart!", {
+      position: "bottom-center",
+      autoClose: 1200,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Slide,
+    });
+  };
   return (
     <div>
       <div className="w-full aspect-[3/4] border border-primary rounded-md p-4 flex flex-col justify-between gap-2 bg-white">

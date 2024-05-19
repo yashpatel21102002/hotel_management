@@ -35,7 +35,7 @@ const Cartslider = ({ side = "right", onClose }) => {
               })}
             >
               <div className="flex flex-col bg-secondary h-[100dvh] shadow-xl overflow-y-auto no-scrollbar">
-                <div className="flex items-center justify-between px-2 py-4 border-b-2 border-primary ">
+                <div className="sticky top-0 bg-secondary flex items-center justify-between px-2 py-4 border-b-2 border-primary ">
                   <h2 className="font-medium text-xl text-primary">Bag</h2>
                   <div className="ml-3 flex h-5 items-center">
                     <button
@@ -49,8 +49,12 @@ const Cartslider = ({ side = "right", onClose }) => {
                     </button>
                   </div>
                 </div>
-                <div className="flex-1 p-2 flex flex-col gap-2">
-                  {cartItems.length === 0 ? (
+                <div className="p-2 flex flex-col gap-2">
+                  {cartItems.length !== 0 ? (
+                    cartItems.map((item) => (
+                      <CartItem data={item} key={item.id} />
+                    ))
+                  ) : (
                     <div className="flex flex-col gap-8 items-center justify-center h-full p-4">
                       <div className="flex flex-col items-center justify-center">
                         <img
@@ -61,13 +65,9 @@ const Cartslider = ({ side = "right", onClose }) => {
                         />
                       </div>
                     </div>
-                  ) : (
-                    cartItems.map((item) => (
-                      <CartItem data={item} key={item.id} />
-                    ))
                   )}
                 </div>
-                <div>
+                <div className="sticky bottom-0 bg-secondary pt-2">
                   {cartItems.length === 0 ? (
                     <a
                       className="bg-primary text-white w-full py-2 text-xl px-2 flex items-center justify-center gap-2"
